@@ -1,2 +1,2 @@
 # keyword-scanner
-###### An application 
+###### A C++ application
