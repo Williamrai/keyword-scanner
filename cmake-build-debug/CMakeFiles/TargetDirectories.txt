@@ -1,3 +1,3 @@
-C:/Study/TechScholars/KeywordScanner/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Study/TechScholars/KeywordScanner/cmake-build-debug/CMakeFiles/untitled.dir
-C:/Study/TechScholars/KeywordScanner/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/c___practice.dir
+C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/rebuild_cache.dir

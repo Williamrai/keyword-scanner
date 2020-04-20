@@ -47,10 +47,10 @@ RM = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Study\TechScholars\KeywordScanner
+CMAKE_SOURCE_DIR = "C:\Study\TechScholars\c++ practice"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Study\TechScholars\KeywordScanner\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Study\TechScholars\c++ practice\cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Study\TechScholars\KeywordScanner\cmake-build-debug\CMakeFiles C:\Study\TechScholars\KeywordScanner\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Study\TechScholars\c++ practice\cmake-build-debug\CMakeFiles" "C:\Study\TechScholars\c++ practice\cmake-build-debug\CMakeFiles\progress.marks"
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Study\TechScholars\KeywordScanner\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Study\TechScholars\c++ practice\cmake-build-debug\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -110,17 +110,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named untitled
+# Target rules for targets named c___practice
 
 # Build rule for target.
-untitled: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 untitled
-.PHONY : untitled
+c___practice: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 c___practice
+.PHONY : c___practice
 
 # fast build rule for target.
-untitled/fast:
-	$(MAKE) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/build
-.PHONY : untitled/fast
+c___practice/fast:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/build
+.PHONY : c___practice/fast
+
+greeting.obj: greeting.cpp.obj
+
+.PHONY : greeting.obj
+
+# target to build an object file
+greeting.cpp.obj:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/greeting.cpp.obj
+.PHONY : greeting.cpp.obj
+
+greeting.i: greeting.cpp.i
+
+.PHONY : greeting.i
+
+# target to preprocess a source file
+greeting.cpp.i:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/greeting.cpp.i
+.PHONY : greeting.cpp.i
+
+greeting.s: greeting.cpp.s
+
+.PHONY : greeting.s
+
+# target to generate assembly for a file
+greeting.cpp.s:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/greeting.cpp.s
+.PHONY : greeting.cpp.s
+
+local_text_manipulator.obj: local_text_manipulator.cpp.obj
+
+.PHONY : local_text_manipulator.obj
+
+# target to build an object file
+local_text_manipulator.cpp.obj:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/local_text_manipulator.cpp.obj
+.PHONY : local_text_manipulator.cpp.obj
+
+local_text_manipulator.i: local_text_manipulator.cpp.i
+
+.PHONY : local_text_manipulator.i
+
+# target to preprocess a source file
+local_text_manipulator.cpp.i:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/local_text_manipulator.cpp.i
+.PHONY : local_text_manipulator.cpp.i
+
+local_text_manipulator.s: local_text_manipulator.cpp.s
+
+.PHONY : local_text_manipulator.s
+
+# target to generate assembly for a file
+local_text_manipulator.cpp.s:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/local_text_manipulator.cpp.s
+.PHONY : local_text_manipulator.cpp.s
 
 main.obj: main.cpp.obj
 
@@ -128,7 +182,7 @@ main.obj: main.cpp.obj
 
 # target to build an object file
 main.cpp.obj:
-	$(MAKE) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/main.cpp.obj
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/main.cpp.obj
 .PHONY : main.cpp.obj
 
 main.i: main.cpp.i
@@ -137,7 +191,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -146,8 +200,35 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+textmanipulator.obj: textmanipulator.cpp.obj
+
+.PHONY : textmanipulator.obj
+
+# target to build an object file
+textmanipulator.cpp.obj:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/textmanipulator.cpp.obj
+.PHONY : textmanipulator.cpp.obj
+
+textmanipulator.i: textmanipulator.cpp.i
+
+.PHONY : textmanipulator.i
+
+# target to preprocess a source file
+textmanipulator.cpp.i:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/textmanipulator.cpp.i
+.PHONY : textmanipulator.cpp.i
+
+textmanipulator.s: textmanipulator.cpp.s
+
+.PHONY : textmanipulator.s
+
+# target to generate assembly for a file
+textmanipulator.cpp.s:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/textmanipulator.cpp.s
+.PHONY : textmanipulator.cpp.s
 
 # Help Target
 help:
@@ -156,11 +237,20 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
-	@echo ... untitled
+	@echo ... c___practice
 	@echo ... rebuild_cache
+	@echo ... greeting.obj
+	@echo ... greeting.i
+	@echo ... greeting.s
+	@echo ... local_text_manipulator.obj
+	@echo ... local_text_manipulator.i
+	@echo ... local_text_manipulator.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... textmanipulator.obj
+	@echo ... textmanipulator.i
+	@echo ... textmanipulator.s
 .PHONY : help
 
 
