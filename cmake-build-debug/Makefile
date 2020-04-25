@@ -230,6 +230,33 @@ textmanipulator.cpp.s:
 	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/textmanipulator.cpp.s
 .PHONY : textmanipulator.cpp.s
 
+ui.obj: ui.cpp.obj
+
+.PHONY : ui.obj
+
+# target to build an object file
+ui.cpp.obj:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/ui.cpp.obj
+.PHONY : ui.cpp.obj
+
+ui.i: ui.cpp.i
+
+.PHONY : ui.i
+
+# target to preprocess a source file
+ui.cpp.i:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/ui.cpp.i
+.PHONY : ui.cpp.i
+
+ui.s: ui.cpp.s
+
+.PHONY : ui.s
+
+# target to generate assembly for a file
+ui.cpp.s:
+	$(MAKE) -f CMakeFiles\c___practice.dir\build.make CMakeFiles/c___practice.dir/ui.cpp.s
+.PHONY : ui.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -251,6 +278,9 @@ help:
 	@echo ... textmanipulator.obj
 	@echo ... textmanipulator.i
 	@echo ... textmanipulator.s
+	@echo ... ui.obj
+	@echo ... ui.i
+	@echo ... ui.s
 .PHONY : help
 
 

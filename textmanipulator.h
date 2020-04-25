@@ -8,25 +8,29 @@
 #include <string>
 #include <regex>
 #include <vector>
+#include <algorithm>
 
 class TextManipulator{
 private:
     std::string fileName;
+    void sort(std::map<std::string, int>& MapType,std::vector<std::pair<std::string,int>>& vec);
+    void sortWithoutCopyingFromMap(std::vector<std::pair<std::string,int>>& vec);
+    void displayAll(std::map<std::string, int>& map,std::vector<std::pair<std::string,int>>& vec,int exportCode);
+    void displaySpecific(std::map<std::string, int>& map);
+    bool canBeOpened();//validator functions
+
 public:
     //constructors
     TextManipulator();
-    TextManipulator(std::string fileName);
 
     //acessing functions
     std::vector<std::string> readAFile();
     std::string getFileName();
 
     //working functions
-    void setFileName(std::string fileName);
-    void writeOnFile(std::map<int,std::vector<std::string>> VecMapType);
-    void changeAllToLowerCase();
-    void calcFrequenciesOfWords(std::vector<std::string> readData);
-    void goToLowerCase(std::string formattedString);
+    bool setFileName(std::string fileName);
+    void writeOnFile(std::vector<std::pair<std::string,int>>& vec,std::string fileName);
+    void calcFrequenciesOfWords(std::vector<std::string> readData,int index);
     std::vector<std::string>  cancelDelims(std::string word, std::regex reg);
 
     //Destructor

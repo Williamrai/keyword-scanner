@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Study/TechScholars/c++ practice/local_text_manipulator.cpp" "C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/c___practice.dir/local_text_manipulator.cpp.obj"
   "C:/Study/TechScholars/c++ practice/main.cpp" "C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/c___practice.dir/main.cpp.obj"
   "C:/Study/TechScholars/c++ practice/textmanipulator.cpp" "C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/c___practice.dir/textmanipulator.cpp.obj"
+  "C:/Study/TechScholars/c++ practice/ui.cpp" "C:/Study/TechScholars/c++ practice/cmake-build-debug/CMakeFiles/c___practice.dir/ui.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

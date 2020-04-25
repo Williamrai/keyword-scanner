@@ -8,73 +8,84 @@
 #include <vector>
 #include <algorithm>
 
+using json = nlohmann::json;// using json third party lib from <"json.hpp">
+typedef std::map<std::string, int> MapType;
+typedef std::pair<std::string,int> pair;
 
-using json = nlohmann::json;
+TextManipulator::TextManipulator() {} //default constructor
 
-TextManipulator::TextManipulator() {}
-
-TextManipulator::TextManipulator(std::string fileName) {
-    this->fileName = fileName;
-}
 
 //set file Name
-void TextManipulator::setFileName(std::string fileName) {
+bool TextManipulator::setFileName(std::string fileName) {
     std::string location = "C:\\c++ codes\\";
+    //std::cout << this->fileName << std::endl;
     this->fileName = location + fileName;
-    std::cout << this->fileName << std::endl;
+    return canBeOpened();
+}//TextManipulator::setFileName(param)
+
+
+bool TextManipulator::canBeOpened() {
+    std::ifstream out;
+    out.open(fileName);
+    if (!out) {
+        return false;
+    }//end of if
+    else{
+        return true;
+    }
 }
 
+
 //write data to file
-void TextManipulator::writeOnFile(std::map<int, std::vector<std::string>> vMap) {
-    std::string location = "C:\\c++ codes\\local.csv";
+void TextManipulator::writeOnFile(std::vector<std::pair<std::string, int> > &vec,std::string fileName) {
+    std::string location = "C:\\c++ codes\\"+ fileName+".csv";
     std::string line;
     std::ofstream out;
     out.open(location);
-    std::map<int, std::vector<std::string>>::iterator it;
+    //std::map<int, std::vector<std::string>>::iterator it;
 
     if (!out) {
         std::cout << fileName << " could not be opened." << std::endl;
+    }//end of if
+
+    for(auto const &pair:vec){
+        out << pair.first << "," << pair.second <<"," << std::endl;
     }
 
-    for (it = vMap.begin(); it != vMap.end(); it++) {
+    /*for (it = vMap.begin(); it != vMap.end(); it++) {
         out << it->first << ", ";
         for (auto x = it->second.begin(); x != it->second.end(); x++) {
             out << *x << ",";
         }
         out << std::endl;
-    }
-    out.close();
-}
+    }*///end of for
+    out.close();//closing the stream
+}//TextManipulator::writeOnFile(param)
+
 
 //read data from file
 std::vector<std::string> TextManipulator::readAFile() {
     std::ifstream iRead;
     std::string rS;
-    iRead.open(fileName);
     std::string s;
     std::vector<std::string> values;
     std::string newString;
     std::string formattedString;
 
+    iRead.open(fileName); //opening the file
     if (!iRead) {
         std::cout << fileName << "could not be opened " << std::endl;
     }
 
     //reading and formatting process
     //step 1
-    //where i am,
     while (getline(iRead, rS, ',')) {
-        //std::cout << rS << std::endl;
-        //s += rS;
         std::stringstream ss(rS);
         //step 2
         while (ss >> newString) {
-            //where
-//            std::cout << "before: " + newString << std::endl;
-//            std::cout << "before size: " << newString.size()<< std::endl;
             //inspection
             for (int i = 0; i < newString.length(); i++) { //step 3
-                if ((newString[i] >= 65 && newString[i] <= 122) ) { //step 4 remove unwanted characters
+                if ((newString[i] >= 65 && newString[i] <= 122) || (newString[i] == 43) ) { //step 4 remove unwanted characters
                     // remove char at position i
                     //newString.erase(0 + i);
 //                    if(newString[i] == 47){
@@ -82,189 +93,48 @@ std::vector<std::string> TextManipulator::readAFile() {
 //                    }
                     formattedString += newString[i];
                 }
-            }
+            }//end of for loop
 
-            //std::cout << "after : " + newString << std::endl;
-            //after inspection
-           //std::cout << "The formatted string: " << formattedString << std::endl;
            transform(formattedString.begin(), formattedString.end(), formattedString.begin(), ::tolower);
 
             if (!formattedString.empty()) //step 5
-                //to lowercase letters
-                //transform(formattedString.begin(),formattedString.end(),formattedString.begin(),::tolower);
                 values.push_back(formattedString);
-              formattedString.clear();
-        }
-    }
+                formattedString.clear();
+        }//end nested while loop
+    }//end first while loop
 
-    //std::cout << "The read data is : " << s << std::endl;
-
-//    for (int i = 0; i < values.size(); i++) {
-//        std::cout << values[i] << std::endl;
-//    }
-
-    iRead.close();
+    iRead.close();//closing the stream
     return values;
-}
+}//TextManipulator::readAFile(param)
 
-//Text Manipulator
-typedef std::map<std::string, int> MapType;
-typedef std::map<int, std::string> RepMapType;
-typedef std::map<int, std::vector<std::string>> VecMapType;
 
-void TextManipulator::calcFrequenciesOfWords(std::vector<std::string> data) {
+//Calc Frequencies
+//typedef std::map<int, std::string> RepMapType;
+//typedef std::map<int, std::vector<std::string>> VecMapType;
+void TextManipulator::calcFrequenciesOfWords(std::vector<std::string> data,int optionMenu) {
     MapType m;
-    RepMapType rMap;
-    VecMapType vMap;
-    std::vector<std::string> vKeywords;
-    std::string keyword;
-
-    //numberContainer.push_back(0);
-
-    //values.push_back(0);
-
-//    std::stringstream check(data[0]);
-//    std::string words;
-//    std::stringstream sToInt;
-//    std::string convW;
-//    std::string processWords;
-
-//    while (check >> words) {
-//        ++m[words];
-//    }
+    std::vector<pair> vec;
+    //RepMapType rMap;
+    //VecMapType vMap;
 
     //processing recurring words into map with key
     std::vector<std::string>::iterator it;
-    //data = ["asd","asd","hello","asd","hi"]
-    //data[0] = asd
     for (it = data.begin(); it != data.end(); it++) {
-        ++m[*it];
+        ++m[*it]; // increment if there is repetition of words
         //map string as a key and int as value
         //++m
         //m[asd] = m[asd] + value;
     }
-    //Display
-    std::cout << "---------------------------------------------" << std::endl;
-    std::cout << "words " << std::setw(25) << " Frequencies" << std::endl;
-    for (MapType::iterator it = m.begin(); it != m.end(); ++it) {
-        std::cout << std::left << std::setw(12) << it->first
-                  << std::right << std::setw(13) << it->second
-                  << '\n';
+
+    if(optionMenu == 2){
+        sort(m,vec);
+        displayAll(m,vec,0);
+    } else if(optionMenu == 1){
+        displaySpecific(m);
+    } else{
+        sort(m,vec);
+        writeOnFile(vec,"allkeywords");
     }
-
-    //map[java] = 18
-
-    //do this first
-    //then ask a prompt to continue or not
-    std::string ask;
-    do{
-        //Enter keywords to find
-        std::cout << "Enter keywords you want to search. To exit enter -1" << std::endl;
-
-        while (getline(std::cin, keyword) && keyword != "-1") {
-            if (!keyword.empty()) {
-                //std::cout << "entered " << keyword << " tp vector " << " ----- ";
-                vKeywords.push_back(keyword);
-            }
-        }
-
-        std::vector<std::string>::iterator kIt;
-        MapType::iterator fIt;
-        //Find the keyword in the map and
-        // display the total occurance of that keyword
-        for (kIt = vKeywords.begin(); kIt != vKeywords.end(); kIt++) {
-            fIt = m.find(*kIt);
-            if(fIt != m.end()){
-                std::cout << std::left << std::setw(12) << fIt->first
-                          << std::right << std::setw(13) << fIt->second
-                          << "\n";
-                std::cout << "------------------------------------------------";
-                std::cout << std::endl;
-            } else{
-                std::cout << std::left << std::setw(12) << *kIt
-                          << std::right << std::setw(13) << "keyword not found. check for spelling error!!"
-                          << "\n";
-                std::cout << "------------------------------------------------";
-                std::cout << std::endl;
-            }
-        }
-
-        std::cout <<"Want to search for something else? If yes type yes or y. otherwise enter any key to exit"  << std::endl;
-        std::cin >> ask;
-        transform(ask.begin(), ask.end(), ask.begin(), ::tolower); //to lowercase
-    }while (ask == "yes" || ask == "y");
-
-
-
-/*    //Swapping the key and values of the map
-    MapType::iterator checkIt = m.begin();
-    for(checkIt; checkIt!= m.end(); checkIt++){
-        rMap[checkIt->second] += "\n" + checkIt->first;
-    }
-
-    for(RepMapType::iterator it = rMap.begin();it!=rMap.end();it++){
-        std::cout << it->first << std::endl;
-        std::cout << it->second << std::endl;
-    }
-
-
-    RepMapType::iterator  rIt = rMap.begin();
-    std::string vString;
-    std::string vNStr;
-    std::vector<std::string> values;
-    int numberCounter;
-
-    //store in a map
-    numberCounter = rIt->first;
-    for(rIt; rIt!=rMap.end();rIt++){
-        vString = rIt->second;
-        //std::cout <<"number counter : " << numberCounter << std::endl;
-        //std::cout <<"map key counter : " << rIt->first << std::endl;
-        //std::cout << vString.size() << std::endl;
-        std::stringstream vSS(vString);
-
-        while (vSS >> vNStr){
-            if(numberCounter!=rIt->first){
-                values.clear();
-                numberCounter = rIt->first;
-            }
-                values.push_back(vNStr);
-                vMap[rIt->first] =  values;
-        }
-    }
-
-    writeOnFile(vMap);*/
-
-//    for(vIt=vMap.begin();vIt!=vMap.end();vIt++){
-//        std::cout << "occurance : " << vIt->first << std::endl;
-//       std::cout << "size of string : " << vIt->second.size() << std::endl;
-//        for(auto i = vIt->second.begin(); i!=vIt->second.end();i++){
-//            std::cout << *i << std::endl;
-//        }
-//    }
-
-//    for( vIt=vMap.begin();vIt!=vMap.end();vIt++ ){
-//        std::cout << vIt-> first << ", ";
-//        for(auto x = vIt->second.begin();x!=vIt->second.end();x++){
-//            std::cout << *x << ",";
-//        }
-//        std::cout << std::endl;
-//    }
-
-
-//    for(checkIt; checkIt!=m.end();checkIt++){
-//        values.push_back(checkIt->first);
-//        rMap[checkIt->second] = values;
-//    }
-//
-//    for(RepMapType::iterator it = rMap.begin(); it!=rMap.end();it++){
-//        std::cout << it->first <<  std::endl;
-//        auto x = it->second.begin();
-//        for(x; x!= it->second.end(); x++ ){
-//            std::cout << " ";
-//            std::cout << *x << std::endl;
-//        }
-//    }
 
 
 //    //json
@@ -272,19 +142,135 @@ void TextManipulator::calcFrequenciesOfWords(std::vector<std::string> data) {
 //    std::string s = j_map.dump();
 //    std::cout << "map converted to json " << std::endl;
 //    std::cout << s;
+}//TextManipulator::calcFrequenciesOfWords
 
 
+//sort
+void TextManipulator::sort(std::map<std::string, int>& map,std::vector<pair>& vec) {
+
+    std::copy(map.begin(),
+              map.end(),
+              std::back_inserter<std::vector<pair>>(vec));
+
+    std::sort(vec.begin(),
+              vec.end(),
+              [](const pair& l, const pair& r){
+                    //std::cout << l.second << " :: " << r.second << std::endl;
+                    //std::cout << l.first << " :: " << r.first << std::endl;
+                        if(l.second != r.second)
+                            return l.second > r.second;
+                        return l.first > r.first;
+    });
+
+    // print the vector
+    /*for (auto const &pair: vec) {
+        std::cout << '{' << pair.first << "," << pair.second << '}' << '\n';
+    }*/
+}//TextManipulator::sort(param)
 
 
+//sort without copying values from map
+void TextManipulator::sortWithoutCopyingFromMap(std::vector<std::pair<std::string, int>> &vec) {
+    std::sort(vec.begin(),
+              vec.end(),
+              [](const pair& l, const pair& r){
+                  //std::cout << l.second << " :: " << r.second << std::endl;
+                  //std::cout << l.first << " :: " << r.first << std::endl;
+                  if(l.second != r.second)
+                      return l.second > r.second;
+                  return l.first > r.first;
+              });
+}//end
 
 
+//display all in descending orders
+//1 is code for exporting to csv
+void TextManipulator::displayAll(std::map<std::string, int> &map, std::vector<std::pair<std::string, int> > &vec,int exportCode) {
+    //Displaying with format
+    std::cout <<"---------------------------------------------" << std::endl;
+    std::cout << "words " << std::setw(25) << " Frequencies" << std::endl;
+    for (auto const &pair: vec) {
+        std::cout << std::left << std::setw(12) << pair.first
+                  << std::right << std::setw(13) << pair.second
+                  << '\n';
+    }//end
+    std::cout << std::endl;
+
+    //write all keywords in the format of csv
+    if(exportCode == 1){
+        writeOnFile(vec,"test");
+    }
+
+}//display
+
+
+//display searched keywords
+void TextManipulator::displaySpecific(std::map<std::string, int> &map) {
+    std::vector<std::string> vKeywords;
+    std::string keyword;
+    std::vector<pair> vecForCsv;
+    //do this first
+    //then ask a prompt to continue or not
+    std::string ask;
+    do{
+        //Enter keywords to find
+        std::cout << "--Enter keywords you want to search. To exit enter -1--" << std::endl;
+
+        while (getline(std::cin, keyword) && keyword != "-1") {
+            if (!keyword.empty()) {
+                //std::cout << "entered " << keyword << " tp vector " << " ----- ";
+                vKeywords.push_back(keyword);
+            }
+        }//end of while loop
+
+        std::vector<std::string>::iterator kIt;
+        MapType::iterator fIt;
+
+        //Find the keyword in the map and
+        // display the total occurance of that keyword
+        std::cout << "------------------------------------------------\n";
+        std::cout << "words " << std::setw(25) << " Frequencies" << std::endl;
+        for (kIt = vKeywords.begin(); kIt != vKeywords.end(); kIt++) {
+            fIt = map.find(*kIt);
+            if(fIt != map.end()){
+                vecForCsv.push_back(std::make_pair(fIt->first,fIt->second));
+
+            } else{
+                std::cout << std::left << std::setw(12) << *kIt
+                          << std::right << std::setw(13) << "keyword not found. check for spelling error!!"
+                          << "\n";
+            }
+//
+//                //std::cout << "------------------------------------------------";
+               // std::cout << std::endl;
+        }//end of for loop
+
+        sortWithoutCopyingFromMap(vecForCsv);
+        for(auto const &pair:vecForCsv){
+            std::cout << std::left << std::setw(12) << pair.first
+                      << std::right << std::setw(13) << pair.second
+                      << "\n";
+        }
+
+        std::cout << std::endl;
+        std::cout << std::endl;
+
+        std::cout <<"--Want to search for something else? then press y.--\n"
+                    "--Want to export this as csv. press x. Otherwise enter any other key to return to menu--"  << std::endl;
+        std::cin >> ask;
+        transform(ask.begin(), ask.end(), ask.begin(), ::tolower); //to lowercase
+
+        if(ask == "x"){
+            writeOnFile(vecForCsv,"keyword");
+        }
+
+        if(ask == "y"){
+            vKeywords.clear();
+            vecForCsv.clear();
+        }
+
+    }while (ask == "yes" || ask == "y"); // end of do while
 }
 
-void TextManipulator::goToLowerCase(std::string formattedString) {
-    transform(formattedString.begin(), formattedString.end(), formattedString.begin(), ::tolower);
-
-}
-
-void TextManipulator::changeAllToLowerCase() {}
-
+//destructor
 TextManipulator::~TextManipulator() {}

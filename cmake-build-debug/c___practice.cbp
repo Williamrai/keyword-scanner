@@ -101,6 +101,12 @@
 		<Unit filename="C:/Study/TechScholars/c++ practice/textmanipulator.h">
 			<Option target="c___practice"/>
 		</Unit>
+		<Unit filename="C:/Study/TechScholars/c++ practice/ui.cpp">
+			<Option target="c___practice"/>
+		</Unit>
+		<Unit filename="C:/Study/TechScholars/c++ practice/ui.h">
+			<Option target="c___practice"/>
+		</Unit>
 		<Unit filename="C:/Study/TechScholars/c++ practice/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

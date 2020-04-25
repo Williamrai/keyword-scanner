@@ -2,6 +2,7 @@
 #include "textmanipulator.h"
 #include <string>
 #include "json.hpp"
+#include "ui.h"
 #include <fstream>
 #include "local_text_manipulator.h"
 
@@ -11,27 +12,11 @@ using namespace std;
 
 
 int main(){
-//    string localFileName = "C:\\c++ codes\\local.csv";
-//    ifstream isOpen(localFileName);
-//    if (isOpen) {
-//        string comment = "no need to open the file. The file is already in the cache";
-//        cout << comment << endl;
-//
-//        LocalTextManip localTextManip;
-//        localTextManip.readFile();
-//    } else{
 
-        string fileName;
-        cout << "Enter filename "<< endl;
-        cin >> fileName;
+    ConsoleUI ui;
+    ui.welcomeBanner();
+    ui.inputPrompt();
 
-        TextManipulator textManipulator;
-        textManipulator.setFileName(fileName);
-        textManipulator.calcFrequenciesOfWords(textManipulator.readAFile());
-        //textManipulator.readAFile();
-    //}
-
-    //isOpen.close();
     return 0;
 }
 

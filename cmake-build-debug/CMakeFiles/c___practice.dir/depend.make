@@ -11,8 +11,13 @@ CMakeFiles/c___practice.dir/main.cpp.obj: ../json.hpp
 CMakeFiles/c___practice.dir/main.cpp.obj: ../local_text_manipulator.h
 CMakeFiles/c___practice.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/c___practice.dir/main.cpp.obj: ../textmanipulator.h
+CMakeFiles/c___practice.dir/main.cpp.obj: ../ui.h
 
 CMakeFiles/c___practice.dir/textmanipulator.cpp.obj: ../json.hpp
 CMakeFiles/c___practice.dir/textmanipulator.cpp.obj: ../textmanipulator.cpp
 CMakeFiles/c___practice.dir/textmanipulator.cpp.obj: ../textmanipulator.h
+
+CMakeFiles/c___practice.dir/ui.cpp.obj: ../textmanipulator.h
+CMakeFiles/c___practice.dir/ui.cpp.obj: ../ui.cpp
+CMakeFiles/c___practice.dir/ui.cpp.obj: ../ui.h
 
