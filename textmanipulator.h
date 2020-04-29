@@ -9,6 +9,7 @@
 #include <regex>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 class TextManipulator{
 private:
@@ -18,6 +19,7 @@ private:
     void displayAll(std::map<std::string, int>& map,std::vector<std::pair<std::string,int>>& vec,int exportCode);
     void displaySpecific(std::map<std::string, int>& map);
     bool canBeOpened();//validator functions
+    void ask();//ask user prompts
 
 public:
     //constructors
@@ -37,3 +39,4 @@ public:
     ~TextManipulator();
 };
 #endif //C___PRACTICE_TEXTMANIPULATOR_H
+

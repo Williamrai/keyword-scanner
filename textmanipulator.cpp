@@ -4,11 +4,9 @@
 #include <map>
 #include <iomanip>
 #include "textmanipulator.h"
-#include "json.hpp"
 #include <vector>
 #include <algorithm>
 
-using json = nlohmann::json;// using json third party lib from <"json.hpp">
 typedef std::map<std::string, int> MapType;
 typedef std::pair<std::string,int> pair;
 
@@ -42,6 +40,7 @@ void TextManipulator::writeOnFile(std::vector<std::pair<std::string, int> > &vec
     std::string line;
     std::ofstream out;
     out.open(location);
+    std::cout << fileName << " saved." << std::endl;
     //std::map<int, std::vector<std::string>>::iterator it;
 
     if (!out) {
@@ -66,17 +65,15 @@ void TextManipulator::writeOnFile(std::vector<std::pair<std::string, int> > &vec
 //read data from file
 std::vector<std::string> TextManipulator::readAFile() {
     std::ifstream iRead;
-    std::string rS;
-    std::string s;
-    std::vector<std::string> values;
-    std::string newString;
-    std::string formattedString;
+    std::string rS; // variable to store a line read  from file
+    std::string newString; // // string that handles a stream of single word
+    std::string formattedString; // string that stores a nearly perfect formatted word
+    std::vector<std::string> values; //a vector that stores each word
 
     iRead.open(fileName); //opening the file
     if (!iRead) {
         std::cout << fileName << "could not be opened " << std::endl;
     }
-
     //reading and formatting process
     //step 1
     while (getline(iRead, rS, ',')) {
@@ -126,23 +123,38 @@ void TextManipulator::calcFrequenciesOfWords(std::vector<std::string> data,int o
         //m[asd] = m[asd] + value;
     }
 
+    std::string saveFileName;
     if(optionMenu == 2){
         sort(m,vec);
         displayAll(m,vec,0);
+        ask();
+
     } else if(optionMenu == 1){
         displaySpecific(m);
     } else{
         sort(m,vec);
-        writeOnFile(vec,"allkeywords");
+        std::cout << "Enter a save file name" << std::endl;
+        std::cin >> saveFileName;
+        writeOnFile(vec,saveFileName);
     }
-
-
 //    //json
 //    json j_map(m);
 //    std::string s = j_map.dump();
 //    std::cout << "map converted to json " << std::endl;
 //    std::cout << s;
 }//TextManipulator::calcFrequenciesOfWords
+
+//ask
+void  TextManipulator::ask(){
+    char c = ' ';
+    std::cout << "To go back to menu press b, otherwise press any key to quit " << std::endl;
+    std::cin >> c;
+    if(c == 'b'){
+        return;
+    }else if(c == 'q'){
+        exit(0);
+    }
+}//end ask()
 
 
 //sort
@@ -197,9 +209,9 @@ void TextManipulator::displayAll(std::map<std::string, int> &map, std::vector<st
     std::cout << std::endl;
 
     //write all keywords in the format of csv
-    if(exportCode == 1){
-        writeOnFile(vec,"test");
-    }
+//    if(exportCode == 1){
+//        writeOnFile(vec,"test");
+//    }
 
 }//display
 
@@ -261,7 +273,10 @@ void TextManipulator::displaySpecific(std::map<std::string, int> &map) {
         transform(ask.begin(), ask.end(), ask.begin(), ::tolower); //to lowercase
 
         if(ask == "x"){
-            writeOnFile(vecForCsv,"keyword");
+            std::string saveFileName;
+            std::cout << "Enter a save fileName" << std::endl;
+            std::cin >> saveFileName;
+            writeOnFile(vecForCsv,saveFileName);
         }
 
         if(ask == "y"){

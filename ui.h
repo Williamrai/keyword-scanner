@@ -13,8 +13,8 @@ public:
 
     //interactive options
     void welcomeBanner();
-    void inputPrompt();
     void showMenu();
+    void run();
     void helpInfo();
 
     //accesing functions
@@ -25,7 +25,9 @@ public:
 private:
     std::string fileName;
     int workingMenu(int menuIndex);
+    void inputPrompt();
 
 };
 
 #endif //C___PRACTICE_UI_H
+

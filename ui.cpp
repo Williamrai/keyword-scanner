@@ -5,7 +5,7 @@
 #include "ui.h"
 #include "textmanipulator.h"
 
-TextManipulator textManipulator;
+TextManipulator textManipulator; // instance of TextManipulator
 
 ConsoleUI::ConsoleUI(){}//default constructor
 
@@ -13,7 +13,7 @@ ConsoleUI::ConsoleUI(std::string fileName) { //overloading constructor
     this->fileName = fileName;
 }//parameter constructor
 
-
+//welcome banner
 void ConsoleUI::welcomeBanner() {
     std::cout << "**************************WELCOME******************************************\n";
     std::cout << "***************************************************************************\n";
@@ -23,7 +23,7 @@ void ConsoleUI::welcomeBanner() {
 
 }//welcomeBanner()
 
-
+//input prompt
 void ConsoleUI::inputPrompt() {
     int again = 1;
     do{
@@ -41,7 +41,7 @@ void ConsoleUI::inputPrompt() {
 
 }//inputPrompt()
 
-
+//menu ui
 void ConsoleUI::showMenu() {
     int c = 0;
     int optionNo;
@@ -54,7 +54,9 @@ void ConsoleUI::showMenu() {
         std::cout << "        1 - Search for keywords.\n";
         std::cout << "        2 - Display all keywords\n";
         std::cout << "        3 - Export keywords to excel file\n";
-        std::cout << "        4 - Exit.\n";
+        std::cout << "        4 - Change fileName \n";
+        std::cout << "        5 - Clear Screen \n";
+        std::cout << "        6 - Exit.\n";
         std::cout << "**************************************************************************\n";
 
         std::cout << "Enter your choice and press return: ";
@@ -66,41 +68,60 @@ void ConsoleUI::showMenu() {
 
 }//showMenu()
 
-
+// menu core code
 int ConsoleUI::workingMenu(int menuIndex) {
     int quit;
 
     switch (menuIndex){
         case 1:
-            //std::cout << menuIndex << std::endl;
+            //search for keywords
             textManipulator.calcFrequenciesOfWords(textManipulator.readAFile(),menuIndex);
             quit = 1;
             break;
         case 2:
-            //std::cout << menuIndex << std::endl;
+            //Display all keywords
             textManipulator.calcFrequenciesOfWords(textManipulator.readAFile(),menuIndex);
             quit = 1;
             break;
         case 3:
-            //std::cout << menuIndex << std::endl;
+            //Export keywords to excel file
             textManipulator.calcFrequenciesOfWords(textManipulator.readAFile(),menuIndex);
             quit = 1;
             break;
         case 4:
-            //std::cout << menuIndex << std::endl;
+            //Change filename
+            std::cout << "Enter the name of the file : ";
+            std::cin >> fileName;
+            textManipulator.setFileName(fileName);
+            showMenu();
+            break;
+        case 5:
+            //quit
+            system("clear");
+            showMenu();
+			quit = 0;
+            break;
+		
+		case 6:
+            //quit
             quit = 0;
             break;
     }
 
-    //std::cout << "value : " << quit << std::endl;
     return quit;
 }//working menu
 
 
+//help info method
 void ConsoleUI::helpInfo() {
     std::cout << "Help Info " << std::endl;
-}
+}//end of help info method
 
+//run
+void ConsoleUI::run(){
+    inputPrompt();
+}//end of run
 
 ConsoleUI::~ConsoleUI() {}//default destructor
+
 
