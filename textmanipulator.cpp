@@ -151,7 +151,7 @@ void  TextManipulator::ask(){
     std::cin >> c;
     if(c == 'b'){
         return;
-    }else if(c == 'q'){
+    }else{
         exit(0);
     }
 }//end ask()

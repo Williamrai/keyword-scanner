@@ -15,6 +15,7 @@ public:
     void welcomeBanner();
     void showMenu();
     void run();
+    void instructionBanner();
     void helpInfo();
 
     //accesing functions

@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "ui.h"
+#include <iomanip>
 #include "textmanipulator.h"
 
 TextManipulator textManipulator; // instance of TextManipulator
@@ -15,19 +16,29 @@ ConsoleUI::ConsoleUI(std::string fileName) { //overloading constructor
 
 //welcome banner
 void ConsoleUI::welcomeBanner() {
-    std::cout << "**************************WELCOME******************************************\n";
-    std::cout << "***************************************************************************\n";
-    std::cout << "--To use this program.--\n"
-                 "--First Enter the name of the file you want to read along with the extension.--\n";
-    std::cout << "--Example: filename.txt or Filename.csv.--\n"<< std::endl;
-
+    std::cout  << "----------------------------------------------------------------------------------------------------------------------\n";
+	std::cout  << "                                                 WELCOME                                                               \n";
+	std::cout  << "                                             TO KEYWORD PARSER                                                         \n";
+	std::cout  << "                                       -By Tech Scholars Spring 2020                                                   \n";
+	std::cout  << "------------------------------------------------------------------------------------------------------------------------\n";
+	
 }//welcomeBanner()
+
+//instruction banner
+void ConsoleUI::instructionBanner(){
+	std::cout  << "   Instructions:- \n"; 
+	std::cout  << "                                            --To use this program.--\n"
+                  "                --First Enter the name of the file you want to read along with the extension.--\n";
+    std::cout  << "                --Example: filename.txt or Filename.csv.--\n"<< std::endl;
+    std::cout  << "------------------------------------------------------------------------------------------------------------------------\n";
+	
+}//instructionBanner();
 
 //input prompt
 void ConsoleUI::inputPrompt() {
     int again = 1;
     do{
-        std::cout << "Enter the name of the file : ";
+        std::cout << "                 -Enter the name of the file to read : ";
         std::cin >> fileName;
         if(textManipulator.setFileName(fileName)){
             showMenu();
@@ -98,6 +109,7 @@ int ConsoleUI::workingMenu(int menuIndex) {
         case 5:
             //quit
             system("clear");
+            welcomeBanner();
             showMenu();
 			quit = 0;
             break;
@@ -105,6 +117,7 @@ int ConsoleUI::workingMenu(int menuIndex) {
 		case 6:
             //quit
             quit = 0;
+            exit(0);
             break;
     }
 
