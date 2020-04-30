@@ -12,17 +12,16 @@ typedef std::pair<std::string,int> pair;
 
 TextManipulator::TextManipulator() {} //default constructor
 
-
 //set file Name
 bool TextManipulator::setFileName(std::string fileName) {
-    std::string location = "C:\\c++ codes\\";
+    //std::string location = "C:\\c++ codes\\";
     //std::cout << this->fileName << std::endl;
-    this->fileName = location + fileName;
+    this->fileName = fileName;
     return canBeOpened();
 }//TextManipulator::setFileName(param)
 
 
-bool TextManipulator::canBeOpened() {
+bool TextManipulator::canBeOpened() {//canBeOpened()
     std::ifstream out;
     out.open(fileName);
     if (!out) {
@@ -31,15 +30,15 @@ bool TextManipulator::canBeOpened() {
     else{
         return true;
     }
-}
+}//canBeOpened()
 
 
 //write data to file
 void TextManipulator::writeOnFile(std::vector<std::pair<std::string, int> > &vec,std::string fileName) {
-    std::string location = "C:\\c++ codes\\"+ fileName+".csv";
+    //std::string location = "C:\\c++ codes\\"+ fileName+".csv";
     std::string line;
     std::ofstream out;
-    out.open(location);
+    out.open(fileName);
     std::cout << fileName << " saved." << std::endl;
     //std::map<int, std::vector<std::string>>::iterator it;
 
@@ -115,9 +114,10 @@ void TextManipulator::calcFrequenciesOfWords(std::vector<std::string> data,int o
     //VecMapType vMap;
 
     //processing recurring words into map with key
+    //enters recurring words to the map
     std::vector<std::string>::iterator it;
     for (it = data.begin(); it != data.end(); it++) {
-        ++m[*it]; // increment if there is repetition of words
+		++m[*it]; // increment if there is repetition of words
         //map string as a key and int as value
         //++m
         //m[asd] = m[asd] + value;

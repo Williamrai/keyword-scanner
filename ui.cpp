@@ -3,7 +3,6 @@
 //
 #include <iostream>
 #include "ui.h"
-#include <iomanip>
 #include "textmanipulator.h"
 
 TextManipulator textManipulator; // instance of TextManipulator
@@ -47,9 +46,6 @@ void ConsoleUI::inputPrompt() {
             again = 0;
         }
     }while (again == 0);
-
-
-
 }//inputPrompt()
 
 //menu ui
@@ -102,7 +98,8 @@ int ConsoleUI::workingMenu(int menuIndex) {
         case 4:
             //Change filename
             std::cout << "Enter the name of the file : ";
-            std::cin >> fileName;
+            //std::cin >> fileName;
+            std::getline(std::cin,fileName);
             textManipulator.setFileName(fileName);
             showMenu();
             break;
