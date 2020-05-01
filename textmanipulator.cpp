@@ -45,7 +45,8 @@ void TextManipulator::writeOnFile(std::vector<std::pair<std::string, int> > &vec
     if (!out) {
         std::cout << fileName << " could not be opened." << std::endl;
     }//end of if
-
+	
+	out << "keywords," << "frequency" << std::endl; 
     for(auto const &pair:vec){
         out << pair.first << "," << pair.second <<"," << std::endl;
     }
@@ -226,7 +227,7 @@ void TextManipulator::displaySpecific(std::map<std::string, int> &map) {
     std::string ask;
     do{
         //Enter keywords to find
-        std::cout << "--Enter keywords you want to search. To exit enter -1--" << std::endl;
+        std::cout << "--Enter keywords you want to search. To search enter -1--" << std::endl;
 
         while (getline(std::cin, keyword) && keyword != "-1") {
             if (!keyword.empty()) {
@@ -249,7 +250,7 @@ void TextManipulator::displaySpecific(std::map<std::string, int> &map) {
 
             } else{
                 std::cout << std::left << std::setw(12) << *kIt
-                          << std::right << std::setw(13) << "keyword not found. check for spelling error!!"
+                          << std::right << std::setw(13) << "keyword not found."
                           << "\n";
             }
 //
@@ -267,24 +268,24 @@ void TextManipulator::displaySpecific(std::map<std::string, int> &map) {
         std::cout << std::endl;
         std::cout << std::endl;
 
-        std::cout <<"--Want to search for something else? then press y.--\n"
-                    "--Want to export this as csv. press x. Otherwise enter any other key to return to menu--"  << std::endl;
+        std::cout <<"--Want to search for something else? then press a.--\n"
+                    "--Want to export this as csv. press s. Otherwise enter any other key to return to menu--"  << std::endl;
         std::cin >> ask;
         transform(ask.begin(), ask.end(), ask.begin(), ::tolower); //to lowercase
 
-        if(ask == "x"){
+        if(ask == "s"){
             std::string saveFileName;
             std::cout << "Enter a save fileName" << std::endl;
             std::cin >> saveFileName;
             writeOnFile(vecForCsv,saveFileName);
         }
 
-        if(ask == "y"){
+        if(ask == "a"){
             vKeywords.clear();
             vecForCsv.clear();
         }
 
-    }while (ask == "yes" || ask == "y"); // end of do while
+    }while (ask == "again" || ask == "a" || ask == "Y"); // end of do while
 }
 
 //destructor

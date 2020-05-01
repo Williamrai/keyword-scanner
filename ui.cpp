@@ -5,6 +5,8 @@
 #include "ui.h"
 #include "textmanipulator.h"
 
+//C:\data\jobs.csv
+
 TextManipulator textManipulator; // instance of TextManipulator
 
 ConsoleUI::ConsoleUI(){}//default constructor
@@ -27,8 +29,8 @@ void ConsoleUI::welcomeBanner() {
 void ConsoleUI::instructionBanner(){
 	std::cout  << "   Instructions:- \n"; 
 	std::cout  << "                                            --To use this program.--\n"
-                  "                --First Enter the name of the file you want to read along with the extension.--\n";
-    std::cout  << "                --Example: filename.txt or Filename.csv.--\n"<< std::endl;
+                  "                --First Enter the full path of the file you want to read along with the extension.--\n";
+    std::cout  << "                --Example: C:\\data\\filename.txt or C:\\data\\Filename.csv.--\n"<< std::endl;
     std::cout  << "------------------------------------------------------------------------------------------------------------------------\n";
 	
 }//instructionBanner();
@@ -99,7 +101,9 @@ int ConsoleUI::workingMenu(int menuIndex) {
             //Change filename
             std::cout << "Enter the name of the file : ";
             //std::cin >> fileName;
+            std::cin.sync();
             std::getline(std::cin,fileName);
+           
             textManipulator.setFileName(fileName);
             showMenu();
             break;
